@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Joyeux anniversaire MITOS 🎂</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Nunito:wght@600;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --nuit:#1a0f2e; --nuit2:#2d1650; --rose:#ff4f8b; --or:#ffc857; --menthe:#3ddbd9; --lilas:#b69cff; --blanc:#fff7fb;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+  font-family:'Nunito',system-ui,sans-serif;color:var(--blanc);overflow:hidden;
+  background:radial-gradient(ellipse at 50% 120%,var(--nuit2),var(--nuit) 65%);
+}
+#fx{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:5}
+.etoiles{position:fixed;inset:0;z-index:0}
+.etoiles i{position:absolute;width:3px;height:3px;border-radius:50%;background:var(--blanc);opacity:.7;animation:scint 3s infinite ease-in-out}
+@keyframes scint{50%{opacity:.1;transform:scale(.5)}}
+
+section{position:fixed;inset:0;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;justify-content:safe center;overflow-y:auto;gap:1.4rem;padding:1.5rem;text-align:center;
+  opacity:0;visibility:hidden;transition:opacity .8s,visibility .8s}
+section.on{opacity:1;visibility:visible}
+
+h1,.titre{font-family:'Bagel Fat One','Nunito',sans-serif;font-weight:400;line-height:1.05}
+.intro-t{font-size:clamp(1.6rem,6vw,2.6rem);max-width:14ch}
+.intro-s{opacity:.8;font-weight:600}
+
+button{
+  font:800 1.1rem 'Nunito',sans-serif;color:var(--nuit);background:var(--or);border:0;border-radius:999px;
+  padding:.9rem 1.8rem;cursor:pointer;box-shadow:0 6px 0 #c48f1d;transition:transform .15s,box-shadow .15s;
+}
+button:hover{transform:translateY(-2px)}
+button:active{transform:translateY(4px);box-shadow:0 2px 0 #c48f1d}
+button:focus-visible{outline:3px solid var(--menthe);outline-offset:4px}
+button.cache{opacity:0;pointer-events:none}
+button{transition:opacity .6s,transform .15s,box-shadow .15s}
+
+/* Gâteau */
+.gateau{position:relative;width:min(88vw,380px);margin-top:3.5rem}
+.etage{margin:0 auto;border-radius:16px 16px 10px 10px;position:relative}
+.haut{width:72%;height:70px;background:linear-gradient(var(--rose) 0 22%,#ff86ad 22%);}
+.bas{width:100%;height:95px;background:linear-gradient(var(--menthe) 0 22%,#7ae9e7 22%);margin-top:-4px}
+.etage::after{content:"";position:absolute;left:0;right:0;top:20%;height:12px;
+  background:radial-gradient(circle at 10px 0,var(--blanc) 9px,transparent 10px) 0 0/20px 12px repeat-x;opacity:.9}
+.assiette{width:112%;margin:0 -6%;height:14px;border-radius:50%;background:var(--lilas);box-shadow:0 8px 20px #0006}
+.bougies{position:absolute;left:14%;width:72%;top:-34px;height:34px}
+.bougie{position:absolute;bottom:0;width:6px;height:26px;border-radius:2px;transform:translateX(-50%)}
+.flamme{
+  position:absolute;left:50%;bottom:100%;width:12px;height:20px;margin-left:-6px;border-radius:50% 50% 50% 50%/65% 65% 35% 35%;
+  background:radial-gradient(circle at 50% 70%,#fff 0 20%,var(--or) 45%,#ff8a3d 80%);
+  box-shadow:0 0 14px 4px #ffc85799;transform:scale(0);transform-origin:50% 100%;transition:transform .35s cubic-bezier(.3,1.8,.5,1)
+}
+.lit .flamme{transform:scale(1);animation:flam .25s infinite alternate .35s}
+@keyframes flam{to{transform:scale(1.1,.92) rotate(3deg)}}
+.fume{position:absolute;left:50%;bottom:100%;width:4px;height:4px;border-radius:50%;background:#fff8;opacity:0}
+.out .fume{animation:fume 1.4s ease-out}
+@keyframes fume{0%{opacity:.8;transform:translateY(0)}100%{opacity:0;transform:translate(8px,-50px) scale(5)}}
+
+/* Final */
+.petit{font-size:clamp(1.1rem,4vw,1.6rem);font-weight:800;color:var(--or)}
+.nom{display:flex;gap:.02em;font-size:clamp(3.4rem,18vw,9rem)}
+.nom span{display:inline-block;opacity:0;transform:translateY(-120%) rotate(-20deg);
+  background:linear-gradient(180deg,var(--blanc),var(--rose));-webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 4px 0 #0005)}
+.final.on .nom span{animation:tombe .9s cubic-bezier(.3,1.6,.5,1) forwards;animation-delay:calc(var(--i)*.12s + .3s)}
+@keyframes tombe{to{opacity:1;transform:none}}
+.age{display:inline-block;font-family:'Bagel Fat One',sans-serif;font-size:clamp(1.6rem,6vw,2.4rem);color:var(--nuit);
+  background:var(--menthe);padding:.15em .8em;border-radius:999px;transform:rotate(-4deg);box-shadow:0 5px 0 #1b9a98;
+  opacity:0}
+.final.on .age{animation:pop .6s 1.5s cubic-bezier(.3,1.8,.5,1) forwards}
+@keyframes pop{from{opacity:0;transform:scale(.2) rotate(-30deg)}to{opacity:1;transform:rotate(-4deg)}}
+.msg{display:grid;gap:.6rem;max-width:36ch;font-size:clamp(.95rem,3.4vw,1.15rem);font-weight:600;line-height:1.45}
+.msg p{opacity:0}
+.final.on .msg p{animation:fond .8s forwards;animation-delay:calc(var(--k)*.5s + 2.3s)}
+.final.on #rejouer{animation:fond 1s 6s forwards;opacity:0}
+@keyframes fond{to{opacity:1}}
+
+@media (prefers-reduced-motion:reduce){
+  .etoiles i,.lit .flamme{animation:none}
+  .final.on .nom span,.final.on .age,.final.on .msg p,.final.on #rejouer{animation-duration:.01s;animation-delay:0s}
+}
+</style>
+</head>
+<body>
+<div class="etoiles" id="etoiles" aria-hidden="true"></div>
+<canvas id="fx" aria-hidden="true"></canvas>
+
+<section id="intro" class="on">
+  <p class="intro-s">Quelqu'un a un message pour toi…</p>
+  <h1 class="intro-t">Ce soir, c'est une grande occasion</h1>
+  <button id="start">Ouvrir ma surprise</button>
+</section>
+
+<section id="scene">
+  <p class="titre petit" id="consigne">Allumage des 20 bougies…</p>
+  <div class="gateau" aria-hidden="true">
+    <div class="bougies" id="bougies"></div>
+    <div class="etage haut"></div>
+    <div class="etage bas"></div>
+    <div class="assiette"></div>
+  </div>
+  <button id="souffler" class="cache">Souffler les bougies 💨</button>
+</section>
+
+<section id="final" class="final">
+  <p class="titre petit">Joyeux anniversaire</p>
+  <h1 class="nom" id="nom" aria-label="MITOS"></h1>
+  <span class="age">20 ans !</span>
+  <p class="msg" id="msg"></p>
+  <button id="rejouer">Rejouer ✨</button>
+</section>
+
+<script>
+/* ====== À PERSONNALISER ====== */
+const NOM = "MITOS";
+const AGE = 20;
+// Une ligne = un paragraphe qui apparaît à l'écran
+const MESSAGE = `
+Arabaina rty nahatratra ny fahanterana ah 🥳🤣
+Tsy dia misy ambara bdb ny tenanay f joyeux anniversaire Mitantsoa😙
+Je te souhaite tout le bonheur du monde d ho tratra ny 20 ans manaraka ndry🥳♥️✨
+On est fière et cha'ceux d'avoir une pote comme toi ( na d adala aza f iny efa resaka hafa ndray🤣)
+Dia ho tonga amin.ny tanjona irina sy ze rehetra kaisaina atao hahahomby avokoa😆✨
+De je serai toujours là pour les 20 ans à venir f aza miala lavitra🤣
+Aro
+`;
+/* ============================= */
+
+const $ = s => document.querySelector(s);
+const COULEURS = ['#ff4f8b','#ffc857','#3ddbd9','#b69cff','#fff7fb'];
+const reduit = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// Étoiles de fond
+for (let i = 0; i < 50; i++) {
+  const e = document.createElement('i');
+  e.style.cssText = `left:${Math.random()*100}%;top:${Math.random()*100}%;animation-delay:${Math.random()*3}s`;
+  $('#etoiles').appendChild(e);
+}
+
+// Lettres du nom
+$('#nom').innerHTML = [...NOM].map((l,i) => `<span style="--i:${i}">${l}</span>`).join('');
+MESSAGE.trim().split('\n').forEach((ligne, k) => {
+  const p = document.createElement('p');
+  p.textContent = ligne.trim();
+  p.style.setProperty('--k', k);
+  $('#msg').appendChild(p);
+});
+$('.age').textContent = AGE + ' ans !';
+
+// Bougies (2 rangées)
+const bougies = [];
+for (let i = 0; i < AGE; i++) {
+  const b = document.createElement('div');
+  const rang = i % 2, col = Math.floor(i / 2), n = Math.ceil(AGE / 2);
+  b.className = 'bougie';
+  b.style.cssText = `left:${(col + .5 + rang*.5) / (n + .5) * 100}%;bottom:${rang ? 8 : 0}px;background:${COULEURS[i % 4]}`;
+  b.innerHTML = '<div class="flamme"></div><div class="fume"></div>';
+  $('#bougies').appendChild(b);
+  bougies.push(b);
+}
+
+// Écrans
+function montrer(id) {
+  document.querySelectorAll('section').forEach(s => s.classList.toggle('on', s.id === id));
+}
+
+// Particules
+const cv = $('#fx'), ctx = cv.getContext('2d');
+let W, H, parts = [], boucle = false, feux = false;
+function taille() { W = cv.width = innerWidth; H = cv.height = innerHeight; }
+addEventListener('resize', taille); taille();
+
+function confettis(n = 160) {
+  if (reduit) n = 40;
+  for (let i = 0; i < n; i++) {
+    parts.push({t:'c', x:W/2, y:H*.6, vx:(Math.random()-.5)*16, vy:-Math.random()*16-4,
+      r:Math.random()*6+4, a:Math.random()*6, va:(Math.random()-.5)*.4,
+      c:COULEURS[i % COULEURS.length], vie:1});
+  }
+  lancer();
+}
+function feuArtifice() {
+  const x = Math.random()*W*.8 + W*.1, y = Math.random()*H*.4 + H*.1;
+  const c = COULEURS[Math.floor(Math.random()*COULEURS.length)];
+  for (let i = 0; i < 40; i++) {
+    const an = i / 40 * Math.PI * 2, v = Math.random()*4 + 2;
+    parts.push({t:'s', x, y, vx:Math.cos(an)*v, vy:Math.sin(an)*v, r:2.5, c, vie:1});
+  }
+}
+function lancer() { if (!boucle) { boucle = true; requestAnimationFrame(frame); } }
+let dernier = 0;
+function frame(t) {
+  ctx.clearRect(0, 0, W, H);
+  if (feux && !reduit && t - dernier > 900) { feuArtifice(); dernier = t; }
+  parts = parts.filter(p => p.vie > 0 && p.y < H + 30);
+  for (const p of parts) {
+    p.x += p.vx; p.y += p.vy;
+    if (p.t === 'c') {
+      p.vy += .35; p.vx *= .985; p.a += p.va; p.vie -= .004;
+      ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.a);
+      ctx.fillStyle = p.c; ctx.globalAlpha = Math.min(1, p.vie * 3);
+      ctx.fillRect(-p.r/2, -p.r/4, p.r, p.r/2); ctx.restore();
+    } else {
+      p.vy += .06; p.vx *= .98; p.vie -= .014;
+      ctx.beginPath(); ctx.fillStyle = p.c; ctx.globalAlpha = Math.max(0, p.vie);
+      ctx.arc(p.x, p.y, p.r, 0, 7); ctx.fill();
+    }
+  }
+  ctx.globalAlpha = 1;
+  if (parts.length || feux) requestAnimationFrame(frame); else boucle = false;
+}
+
+// Déroulé
+let timer;
+function demarrer() {
+  feux = false; clearInterval(timer);
+  bougies.forEach(b => b.classList.remove('lit', 'out'));
+  $('#souffler').classList.add('cache');
+  $('#consigne').textContent = `Allumage des ${AGE} bougies…`;
+  montrer('scene');
+  let i = 0;
+  timer = setInterval(() => {
+    bougies[i++].classList.add('lit');
+    if (i === bougies.length) {
+      clearInterval(timer);
+      $('#consigne').textContent = 'Fais un vœu, puis souffle !';
+      $('#souffler').classList.remove('cache');
+    }
+  }, 180);
+}
+function souffler() {
+  $('#souffler').classList.add('cache');
+  bougies.forEach((b, i) => setTimeout(() => { b.classList.remove('lit'); b.classList.add('out'); }, i * 40));
+  setTimeout(() => {
+    confettis(220); montrer('final');
+    feux = true; lancer();
+  }, 1100);
+}
+
+$('#start').onclick = demarrer;
+$('#souffler').onclick = souffler;
+$('#rejouer').onclick = () => { confettis(120); feuArtifice(); };
+$('#final').addEventListener('click', e => { if (e.target.tagName !== 'BUTTON') confettis(60); });
+</script>
+</body>
+</html>
